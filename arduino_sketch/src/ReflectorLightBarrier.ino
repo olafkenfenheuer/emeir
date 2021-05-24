@@ -20,7 +20,7 @@
 * You should have received a copy of the GNU General Public License
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-
+#include <Arduino.h>
 #include <avr/eeprom.h>
 
 const int analogInPin = A7;  // Analog input pin that the photo transistor is attached to
@@ -110,6 +110,8 @@ void detectTrigger(int val) {
     Serial.println(triggerState? 1 : 0);
     // control internal LED
     digitalWrite(ledOutPin, triggerState);
+    delay(50);
+    digitalWrite(ledOutPin, false);
   }
 }
 
@@ -174,6 +176,15 @@ void setup() {
   pinMode(ledOutPin, OUTPUT);
   // read config from EEPROM
   readTriggerLevels();
+
+   digitalWrite(ledOutPin, true);
+    delay(100);
+    digitalWrite(ledOutPin, false);
+    delay(100);
+   digitalWrite(ledOutPin, true);
+    delay(100);
+    digitalWrite(ledOutPin, false);
+
 }
 
 /**
